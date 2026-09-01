@@ -1,0 +1,199 @@
+/* ===== 全局重置 ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* 通配符选择器 * 匹配页面所有元素。清除浏览器默认的 margin（外边距）和 padding（内边距），解决不同浏览器（如 Chrome 和 Firefox）默认边距不一致的问题。box-sizing: border-box 是核心重置，让元素的 width 和 height 包含 padding 和 border，避免给盒子加内边距时撑大盒子导致布局错位，是业界标准重置方案。 */
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f7fa;
+}
+/* 页面主体样式。font-family 是一组"系统字体栈"——优先使用苹果（-apple-system）和微软（BlinkMacSystemFont）的系统字体，若没有则回退到 Segoe UI、Roboto 等，最后兜底为无衬线体（sans-serif），目的：无需加载外部字体文件，让网页文字渲染速度最快且和用户操作系统风格一致。line-height: 1.6 行高设为字体大小的 1.6 倍，提升大段文字的可读性。文字颜色 #333（深灰）比纯黑更柔和，背景色 #f5f7fa（浅灰蓝）营造干净清爽的视觉基调。 */
+
+/* ===== 容器 ===== */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+/* 容器类（对应 HTML 中的 <div class="container">）。max-width: 960px 限制内容最大宽度，避免大屏显示器上文字一行太长（影响阅读体验）。margin: 0 auto 是经典的水平居中写法（上下为0，左右自动平分）。padding: 0 20px 给左右增加 20px 内边距，防止在小屏设备上内容紧贴浏览器边缘。 */
+
+/* ===== 页眉样式 ===== */
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 20px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+/* <header> 页眉标签样式。background 使用线性渐变（135度角），从 #667eea（蓝紫色）过渡到 #764ba2（紫罗兰色），产生现代感渐变色背景。color: #fff 让内部文字为白色。padding: 20px 0 上下内边距 20px，左右为0（由内部 .container 控制左右留白）。box-shadow 添加向下偏移 2px、模糊半径 10px 的半透明黑色阴影，让页眉浮在页面内容之上，增加层次感。 */
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+/* 页眉内部的容器采用 Flexbox 弹性布局。display: flex 激活弹性盒子。justify-content: space-between 让 Logo 和导航菜单在水平方向两端对齐（一个贴左，一个贴右）。align-items: center 让它们在垂直方向上居中对齐。flex-wrap: wrap 允许子元素换行——当屏幕变窄时，导航菜单若放不下会自动折行，避免溢出。 */
+
+.logo h1 {
+    font-size: 24px;
+    font-weight: 700;
+}
+/* Logo 中的一级标题。font-size: 24px 设置字号，font-weight: 700 加粗（等同于 bold），让博客名称在视觉上更突出。 */
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+/* <nav> 中的无序列表。display: flex 让列表项横向排列。list-style: none 去除 <ul> 默认的黑色圆点项目符号。gap: 30px 直接设置每个菜单项（<li>）之间的间距为 30px，无需额外用 margin 或 padding 计算，这是 Flexbox 和 Grid 的现代写法。 */
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: opacity 0.3s;
+}
+/* 导航菜单链接样式。color: #fff 白色文字。text-decoration: none 去掉 <a> 标签默认的下划线。font-size: 16px 基础字号。transition: opacity 0.3s 定义透明度属性的过渡动画——当属性变化时，在 0.3 秒内平滑变化（不突兀），提升交互质感。 */
+
+nav ul li a:hover {
+    opacity: 0.7;
+}
+/* 鼠标悬停（:hover）时，链接透明度变为 0.7（即变暗/半透明）。配合上面的 transition，会产生 0.3 秒的淡入淡出效果，给用户明确的"这里可以点击"的反馈。 */
+
+/* ===== 主内容区 ===== */
+main {
+    padding: 40px 0;
+}
+/* <main> 核心区。padding: 40px 0 给上下增加 40px 内边距，让文章列表与页眉、页脚保持呼吸间距，避免内容拥挤。 */
+
+/* ===== 文章列表 ===== */
+.blog-post {
+    background: #fff;
+    padding: 30px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+/* 单篇文章卡片（class="blog-post"）。背景纯白。padding: 30px 内边距让文字不贴边。margin-bottom: 25px 让上下文章之间隔开距离。border-radius: 12px 给卡片添加圆角，更柔和现代。box-shadow 添加轻微阴影（垂直偏移 2px，模糊 8px，极淡黑色），形成卡片浮起效果。transition 同时监听 transform（位移）和 box-shadow（阴影）两个属性，为悬停效果做铺垫。 */
+
+.blog-post:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+}
+/* 鼠标悬停卡片时，transform: translateY(-3px) 让整张卡片向上浮动 3px。box-shadow 阴影加深（垂直偏移 8px，模糊 25px，透明度提升至 0.10），配合过渡动画，制造出"卡片被手指拎起来"的精致交互感，提升浏览愉悦度。 */
+
+.blog-post h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+/* 文章二级标题。font-size: 22px 比 Logo 稍小，形成层级对比。margin-bottom: 10px 与下方元数据拉开距离。 */
+
+.blog-post h2 a {
+    color: #333;
+    text-decoration: none;
+}
+/* 标题内的超链接。color: #333 保持深灰色（与正文颜色一致），不因是链接而默认变蓝。text-decoration: none 去掉下划线。这样标题看起来就是纯文本，但实际可点击。 */
+
+.blog-post h2 a:hover {
+    color: #667eea;
+}
+/* 悬停标题链接时，颜色变为页眉渐变的起始色 #667eea（蓝紫色），暗示点击跳转，并呼应整体品牌配色。 */
+
+.post-meta {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 12px;
+}
+/* 文章元数据（日期、标签）容器。font-size: 14px 比正文小，color: #999 浅灰色，让其视觉权重降低，不干扰标题和摘要的阅读。margin-bottom: 12px 与摘要保持间距。 */
+
+.post-meta span {
+    margin-right: 20px;
+}
+/* 元数据中的每个 <span>（日期和标签）右侧增加 20px 间距，让它们在一行内隔开。 */
+
+.post-excerpt {
+    color: #666;
+    margin-bottom: 15px;
+}
+/* 文章摘要（class="post-excerpt"）。color: #666 中灰色，比标题深灰略浅，形成文字层级。margin-bottom: 15px 与"阅读全文"按钮隔开。 */
+
+.read-more {
+    display: inline-block;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+/* "阅读全文"链接。display: inline-block 使其既保持行内特性（不换行），又能设置宽高和内边距（如果有需要）。color: #667eea 主题蓝色。text-decoration: none 去掉下划线。font-weight: 600 半粗体加强视觉重量。transition: color 0.3s 为颜色变化添加过渡。 */
+
+.read-more:hover {
+    color: #764ba2;
+}
+/* 悬停时颜色变为渐变的终点色 #764ba2（深紫），与页眉渐变色首尾呼应，整体品牌感更强。 */
+
+/* ===== 页脚样式 ===== */
+footer {
+    background: #2d3748;
+    color: #a0aec0;
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 20px;
+}
+/* <footer> 页脚。background: #2d3748 深灰蓝背景（比纯黑更现代）。color: #a0aec0 浅灰色文字，保证深色背景上的可读性。text-align: center 让版权文字居中。padding: 25px 0 上下内边距。margin-top: 20px 与上方 main 内容区隔开，防止紧贴。 */
+
+footer p {
+    font-size: 14px;
+}
+/* 页脚段落文字小一号，不喧宾夺主。 */
+
+/* ===== 响应式设计（媒体查询） ===== */
+/* 平板及以下 */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul {
+        margin-top: 15px;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .blog-post {
+        padding: 20px;
+    }
+
+    .blog-post h2 {
+        font-size: 19px;
+    }
+}
+/* 媒体查询（@media），针对屏幕宽度 ≤ 768px 的设备（iPad 竖屏及以下）。① 页眉内部弹性容器改为纵向排列（flex-direction: column），Logo 和导航上下堆叠，且文字居中（text-align: center）。② 导航菜单顶部加 15px 间距，间距缩小至 20px，允许换行（flex-wrap: wrap）并居中。③ 文章卡片内边距缩减至 20px，标题缩小至 19px，以适应较小屏幕，防止内容溢出。 */
+
+/* 手机 */
+@media (max-width: 480px) {
+    nav ul {
+        gap: 12px;
+    }
+
+    nav ul li a {
+        font-size: 14px;
+    }
+
+    .logo h1 {
+        font-size: 20px;
+    }
+
+    .post-meta span {
+        display: block;
+        margin-right: 0;
+    }
+}
+/* 针对屏幕宽度 ≤ 480px 的窄屏手机（如 iPhone SE）。① 导航间距进一步缩至 12px，链接字号缩至 14px，Logo 缩至 20px，挤出更多空间。② 最关键的是 .post-meta span 设为 display: block（块级元素），让日期和标签从同行显示变为上下换行，并取消右侧边距（margin-right: 0），避免小屏幕上两个元数据挤成一团，提升触屏点击的易读性。 */
